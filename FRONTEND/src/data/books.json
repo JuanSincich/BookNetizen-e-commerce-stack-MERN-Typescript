@@ -1,0 +1,112 @@
+[
+  {
+    "id": 1,
+    "title": "La fuerza de su mirada",
+    "autor": "Tim Powers",
+    "img": "/public/libros/Tim_Powers_Gigamesh_Corominas_la_fuerza_de_su_mirada.jpg",
+    "cathegory": "",
+    "description": "",
+    "price": "1000",
+    "pages": "480"
+  },
+  {
+    "id": 2,
+    "title": "El marciano",
+    "autor": "Andy Weir",
+    "img": "/public/libros/el-marciano-andy-weir-ediciones-b-nova.jpg",
+    "cathegory": "Ficción",
+    "description": "‘El marciano’ de Andy Weir relata las experiencias de un astronauta que se ha quedado solo en Marte cuando sus compañeros lo dan por muerto y abandonan la misión. Tiene comida para algo más de un año, pero hasta dentro de cuatro años no vendrá la próxima misión tripulada al planeta y no parece que haya nada que se pueda hacer para salvarlo. Con el equipo que han dejado atrás sus compañeros y su ingenio “McGiveresco” Mark tendrá que apañárselas para sobrevivir. Relatado desde un punto de vista científico y en forma de diario, ‘El marciano’ atrapa al lector desde el primer momento. Leedlo antes de que salga la película el año que viene.",
+    "price": "1520",
+    "pages": "407480"
+  },
+  {
+    "id": 3,
+    "title": "La música del silencio",
+    "autor": "Patrick Rothfuss",
+    "img": "public/libros/patrick-rothfuss-la-musica-del-silencio.jpg",
+    "cathegory": "",
+    "description": "",
+    "price": "1800",
+    "pages": "160"
+  },
+  {
+    "id": 4,
+    "title": "Aniquilación",
+    "autor": "Jeff VanderMeer",
+    "img": "public/libros/jeff-vandermeer-aniquilación-portada-southern-reach-destino.jpg",
+    "cathegory": "",
+    "description": "",
+    "price": "2300",
+    "pages": "432"
+  },
+  {
+    "id": 5,
+    "title": "La joven ahogada",
+    "autor": "Caitlín R. Kiernan",
+    "img": "public/libros/valdemar_joven_ahogada_caitlin_kiernan_insomnia_portada.jpg",
+    "cathegory": "",
+    "description": "",
+    "price": "1250",
+    "pages": "392"
+  },
+  {
+    "id": 6,
+    "title": "¡Pérfidas!",
+    "autor": "Tamara Romero",
+    "img": "public/libros/perfidas_tamara_romero_pulpas_aristas_martinez.jpg",
+    "cathegory": "",
+    "description": "",
+    "price": "1280",
+    "pages": "1080"
+  },
+  {
+    "id": 7,
+    "title": "Jagannath",
+    "autor": "Karin Tidbeck",
+    "img": "public/libros/jagannath-karin-tidbeck-reseña-nevsky.jpeg",
+    "cathegory": "",
+    "description": "",
+    "price": "1920",
+    "pages": "1320"
+  },
+  {
+    "id": 8,
+    "title": "El océano al final del camino",
+    "autor": "Neil Gaiman",
+    "img": "public/libros/oceano-final-camino.jpg",
+    "cathegory": "",
+    "description": "",
+    "price": "2400",
+    "pages": "1720"
+  },
+  {
+    "id": 9,
+    "title": "Perillán",
+    "autor": "Terry Pratchett",
+    "img": "public/libros/fantascy_pratchett_perillán_dodger.jpg",
+    "cathegory": "",
+    "description": "",
+    "price": "1610",
+    "pages": "400"
+  },
+  {
+    "id": 10,
+    "title": "Legión y El alma del emperador",
+    "autor": "Brandon Sanderson",
+    "img": "public/libros/fantascy_legion_el_alma_del_emperador_brandon_sanderson.jpg",
+    "cathegory": "",
+    "description": "",
+    "price": "240",
+    "pages": "1450"
+  },
+  {
+    "id": 11,
+    "title": "EL LOBO ESTEPARIO",
+    "autor": "Hermann Hesse",
+    "img": "public/libros/el_lobo_estepario.jpg",
+    "cathegory": "",
+    "description": "",
+    "price": "1013",
+    "pages": "176"
+  }
+]
