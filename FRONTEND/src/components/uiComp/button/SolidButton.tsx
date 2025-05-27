@@ -2,6 +2,7 @@ import { Box, Button } from "@mui/material";
 import theme from "../../../theme/Theme";
 
 interface SingleButtonProps {
+  type: "submit";
   text: string;
   style?: "main" | "light";
   width?: string;
@@ -9,6 +10,7 @@ interface SingleButtonProps {
 }
 
 export default function SolidButton({
+  type,
   text,
   style = "main",
   width,
@@ -25,7 +27,7 @@ export default function SolidButton({
   return (
     <Box sx={{ display: "flex", justifyContent: align }}>
       <Button
-        type="submit"
+        type={type}
         id="solidButton"
         variant="outlined"
         sx={{
