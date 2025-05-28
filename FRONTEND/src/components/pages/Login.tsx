@@ -12,9 +12,6 @@ export default function Login() {
 
   // Capturamos los datos del formulario
 
-  /* const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault(); */
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
