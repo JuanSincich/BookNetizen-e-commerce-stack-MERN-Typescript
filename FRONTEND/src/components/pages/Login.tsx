@@ -5,7 +5,11 @@ import SolidButton from "../uiComp/button/SolidButton";
 import React, { useState } from "react";
 import axios from "axios";
 
-export default function Login() {
+interface LoginProps {
+  onCloseModal: () => void; // Función para cerrar el modal
+}
+
+export default function Login({ onCloseModal }: LoginProps) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -116,6 +120,7 @@ export default function Login() {
           to="/Register"
           underline="hover"
           sx={{ fontSize: "1.2rem", fontWeight: "500" }}
+          onClick={onCloseModal}
         >
           Registrarse
         </Link>

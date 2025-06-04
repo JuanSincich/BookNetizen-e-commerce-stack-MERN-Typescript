@@ -19,6 +19,10 @@ interface NavLink {
 export default function Layout() {
   const [loginOpen, setLoginOpen] = useState(false);
 
+  const handleCloseLoginModal = () => {
+    setLoginOpen(false);
+  };
+
   const navArrayLinks: NavLink[] = [
     { title: "Inicio", path: "/" },
     { title: "Categorías", path: "/categories" },
@@ -75,7 +79,7 @@ export default function Layout() {
             width: { xs: "90%", sm: "auto" },
           }}
         >
-          <Login />
+          <Login onCloseModal={handleCloseLoginModal} />
         </Box>
       </Modal>
     </Box>

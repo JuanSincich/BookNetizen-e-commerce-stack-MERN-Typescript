@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <>
       {/*   <SearchBar /> */}
-      <Register />
+      {/*      <Register /> */}
       {/*       <Hero />
       <Carousel title="Los mas visitados" />
       <Carousel title="Los más vendidos" />

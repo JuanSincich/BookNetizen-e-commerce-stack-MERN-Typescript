@@ -3,10 +3,11 @@ import theme from "../../../theme/Theme";
 
 interface SingleButtonProps {
   type: "submit";
-  text: string;
+  text: React.ReactNode;
   style?: "main" | "light";
   width?: string;
   align?: "flex-start" | "center" | "flex-end";
+  disabled?: boolean;
 }
 
 export default function SolidButton({
