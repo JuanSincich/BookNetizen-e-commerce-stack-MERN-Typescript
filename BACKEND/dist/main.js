@@ -1,13 +1,24 @@
 "use strict";
+// src/main.ts
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// src/main.ts
+require("dotenv/config");
 const express_1 = __importDefault(require("express"));
+const mongoose_1 = __importDefault(require("mongoose"));
 const app = (0, express_1.default)();
-const PORT = process.env.PORT || 3001; // Usamos la variable de entorno PORT o por defecto 3001
-app.use(express_1.default.json()); // Middleware para parsear el cuerpo de las peticiones en formato JSON
+const PORT = process.env.PORT || 3001;
+mongoose_1.default
+    .connect(process.env.MONGODB_URI)
+    .then(() => {
+    console.log("¡Conectado a MongoDB Atlas con éxito!"); // Mensaje de éxito
+})
+    .catch((error) => {
+    console.error("Error al conectar a MongoDB Atlas:", error.message); // Mensaje de error
+    process.exit(1); // Sale de la aplicación si no se puede conectar a la DB
+});
+app.use(express_1.default.json());
 // Ruta de prueba
 app.get("/", (req, res) => {
     res.send("<h1>¡El servidor está funcionando correctamente!</h1>");

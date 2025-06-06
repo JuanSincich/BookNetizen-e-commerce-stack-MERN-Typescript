@@ -1,11 +1,25 @@
 // src/main.ts
+
+import "dotenv/config";
+
 import express from "express";
 import type { Request, Response } from "express";
+import mongoose from "mongoose";
 
 const app = express();
-const PORT = process.env.PORT || 3001; // Usamos la variable de entorno PORT o por defecto 3001
+const PORT = process.env.PORT || 3001;
 
-app.use(express.json()); // Middleware para parsear el cuerpo de las peticiones en formato JSON
+mongoose
+  .connect(process.env.MONGODB_URI!)
+  .then(() => {
+    console.log("¡Conectado a MongoDB Atlas con éxito!"); // Mensaje de éxito
+  })
+  .catch((error) => {
+    console.error("Error al conectar a MongoDB Atlas:", error.message); // Mensaje de error
+    process.exit(1); // Sale de la aplicación si no se puede conectar a la DB
+  });
+
+app.use(express.json());
 
 // Ruta de prueba
 app.get("/", (req: Request, res: Response) => {
