@@ -81,19 +81,35 @@ app.get("/", (req: Request, res: Response) => {
   res.send("<h1>¡El servidor está funcionando correctamente!</h1>");
 });
 
-app.post("/login", (req: Request, res: Response) => {
+app.post("/login", async (req: Request, res: Response) => {
   const { email, password } = req.body;
 
-  // Simulamos un usuario válido:
-  const userValido = {
-    email: "usuario@correo.com",
-    password: "123456",
-  };
+  try {
+    //busqueda de usuario
 
-  if (email === userValido.email && password === userValido.password) {
-    return res.status(200).json({ message: "Login exitoso", user: { email } });
-  } else {
-    return res.status(401).json({ message: "Email o contraseña incorrectos" });
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(400).json({ message: "credenciales inválidas" });
+    }
+    //comparación de contraseñas
+    const isMatch = await bcrypt.compare(password, user.passwordHash);
+    if (!isMatch) {
+      return res.status(400).json({
+        message: "Credenciales inválidas (email o contraseña incorrectos).",
+      });
+    }
+    res.status(200).json({
+      message: "¡Login exitoso!",
+      user: {
+        username: user.username,
+        email: user.email, // Solo devuelve información segura
+      },
+    });
+  } catch (error: any) {
+    console.error("Error en el intento de login:", error);
+    res.status(500).json({
+      message: "Error interno del servidor al intentar iniciar sesión.",
+    });
   }
 });
 
