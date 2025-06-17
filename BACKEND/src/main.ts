@@ -7,7 +7,8 @@ import type { Request, Response } from "express";
 import mongoose from "mongoose";
 import User from "./db/models/User";
 import bcrypt from "bcryptjs";
-import { log } from "console";
+import jwt from "jsonwebtoken";
+import authenticateToken from "./middleware/authMiddleware";
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -91,15 +92,39 @@ app.post("/login", async (req: Request, res: Response) => {
     if (!user) {
       return res.status(400).json({ message: "credenciales inválidas" });
     }
+
     //comparación de contraseñas
     const isMatch = await bcrypt.compare(password, user.passwordHash);
+
     if (!isMatch) {
       return res.status(400).json({
         message: "Credenciales inválidas (email o contraseña incorrectos).",
       });
     }
+
+    // Asegurarse de que JWT_SECRET esté definido en .env
+    if (!process.env.JWT_SECRET) {
+      console.error(
+        "JWT_SECRET no está definido en el archivo .env. Error de configuración."
+      );
+      return res.status(500).json({
+        message:
+          "Error interno del servidor: configuración de autenticación incompleta.",
+      });
+    }
+
+    const payload = {
+      id: user.id,
+      username: user.username,
+    };
+
+    const token = jwt.sign(payload, process.env.JWT_SECRET, {
+      expiresIn: "1h",
+    });
+
     res.status(200).json({
       message: "¡Login exitoso!",
+      token,
       user: {
         username: user.username,
         email: user.email, // Solo devuelve información segura
@@ -113,7 +138,22 @@ app.post("/login", async (req: Request, res: Response) => {
   }
 });
 
-// Iniciar el servidor
+interface AuthenticatedRequest extends Request {
+  user?: { id: string; username: string };
+}
+
+app.get("/profile", authenticateToken, (req: Request, res: Response) => {
+  // Aquí, sabemos que 'req.user' existe porque authenticateToken ya lo verificó y adjuntó.
+  // Usamos 'as AuthenticatedRequest' para ayudar a TypeScript.
+  const authReq = req as AuthenticatedRequest;
+
+  res.status(200).json({
+    message: `¡Bienvenido a tu perfil, ${authReq.user?.username}!`, // Accedemos al username del token
+    userId: authReq.user?.id, // Accedemos al ID del usuario del token
+    data: "Esta es información confidencial solo para usuarios autenticados.",
+  });
+});
+
 app.listen(PORT, () => {
   console.log(`🚀 Servidor escuchando en el puerto ${PORT}`);
 });
