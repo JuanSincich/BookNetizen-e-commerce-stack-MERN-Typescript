@@ -120,12 +120,10 @@ app.post("/login", async (req, res) => {
     }
 });
 app.get("/profile", authMiddleware_1.default, (req, res) => {
-    // Aquí, sabemos que 'req.user' existe porque authenticateToken ya lo verificó y adjuntó.
-    // Usamos 'as AuthenticatedRequest' para ayudar a TypeScript.
     const authReq = req;
     res.status(200).json({
-        message: `¡Bienvenido a tu perfil, ${authReq.user?.username}!`, // Accedemos al username del token
-        userId: authReq.user?.id, // Accedemos al ID del usuario del token
+        message: `¡Bienvenido a tu perfil, ${authReq.user?.username}!`,
+        userId: authReq.user?.id,
         data: "Esta es información confidencial solo para usuarios autenticados.",
     });
 });

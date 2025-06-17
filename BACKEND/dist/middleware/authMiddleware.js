@@ -21,29 +21,20 @@ const authenticateToken = (req, res, next) => {
             message: "Error interno del servidor: configuración de autenticación incompleta.",
         });
     }
-    // 4. Verificar el token usando la clave secreta
-    // jwt.verify(token, claveSecreta, callback)
+    // Verificar el token usando la clave secreta
     jsonwebtoken_1.default.verify(token, process.env.JWT_SECRET, (err, user) => {
-        // Si hay un error al verificar el token (ej. token inválido, expirado, malformado)
         if (err) {
             console.error("Error al verificar el token:", err.message);
-            // Podemos dar mensajes más específicos para el cliente
             if (err.name === "TokenExpiredError") {
-                return res
-                    .status(401)
-                    .json({
+                return res.status(401).json({
                     message: "Token expirado. Por favor, inicie sesión de nuevo.",
                 });
             }
-            // Para cualquier otro error de token (inválido, malformado, etc.)
             return res
                 .status(403)
                 .json({ message: "Token inválido o no autorizado." });
         }
-        // Si el token es válido, adjuntamos la información del usuario a la petición (req.user)
-        // El 'user' que obtenemos aquí es el payload del token que firmamos (id, username).
-        req.user = user; // Casteamos para asegurar el tipo en TypeScript
-        // Finalmente, pasamos el control al siguiente middleware o a la función de la ruta
+        req.user = user;
         next();
     });
 };
