@@ -9,6 +9,7 @@ import User from "./db/models/User";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import authenticateToken from "./middleware/authMiddleware";
+import cors from "cors";
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -19,11 +20,19 @@ mongoose
     console.log("¡Conectado a MongoDB Atlas con éxito!");
   })
   .catch((error) => {
-    console.error("Error al conectar a MongoDB Atlas:", error.message); //Mensaje de error
-    process.exit(1); //Sale de la aplicación si no se puede conectar a la DB
+    console.error("Error al conectar a MongoDB Atlas:", error.message);
+    process.exit(1);
   });
 
 app.use(express.json());
+
+const corsOptions = {
+  origin: "http://localhost:5173",
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true,
+};
+app.use(cors());
 
 app.post("/register", async (req: Request, res: Response) => {
   const { username, email, password } = req.body;
