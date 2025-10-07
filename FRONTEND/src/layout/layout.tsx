@@ -8,6 +8,7 @@ import { useState } from "react";
 import PersonIcon from "@mui/icons-material/Person";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import StarIcon from "@mui/icons-material/Star";
+import AutoCarousel from "../components/uiComp/banner/AutoCarousel";
 
 interface NavLink {
   title: string;
@@ -45,6 +46,7 @@ export default function Layout() {
         minHeight: "100vh",
       }}
     >
+      <AutoCarousel />
       <NavBar navArrayLinks={navArrayLinks} />
       <Box sx={{ flexGrow: 1 }}>
         <Outlet />

@@ -15,6 +15,7 @@ import Logo from "../../../../public/cartShoppingLogoExport.jpg";
 
 import theme from "../../../theme/Theme";
 import { useNavigate } from "react-router-dom";
+import SingleButton from "../button/SingleButton";
 
 interface NavLink {
   title: string;
@@ -85,7 +86,7 @@ export default function NavBar({ navArrayLinks }: NavBarProps) {
                 Book Netizen
               </Typography>
             </Box>
-
+            <SingleButton text="Publicar Libro" variantColor="secondary" />
             {/* botones */}
             <Box sx={{ display: { xs: "none", sm: "block" } }}>
               {navArrayLinks.map((item) => (

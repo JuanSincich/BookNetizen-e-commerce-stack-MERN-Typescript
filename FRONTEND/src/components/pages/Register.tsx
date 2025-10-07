@@ -176,7 +176,7 @@ export default function Register() {
         }}
       >
         <Typography variant="h5" textAlign="center">
-          Registate en Book Netizen
+          Registrate en Book Netizen
         </Typography>
         <Box
           component="form"

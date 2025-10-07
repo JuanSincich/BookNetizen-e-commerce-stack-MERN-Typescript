@@ -200,8 +200,12 @@ export default function BookPage() {
             </Box>
 
             <Box display="flex" justifyContent="end" gap="1rem">
-              <SolidButton text="Comprar ahora" />
-              <SolidButton text="Agregar al carrito" style="light" />
+              <SolidButton type="submit" text="Comprar ahora" />
+              <SolidButton
+                type="submit"
+                text="Agregar al carrito"
+                style="light"
+              />
             </Box>
           </Grid2>
           <Grid2 size={4}>
