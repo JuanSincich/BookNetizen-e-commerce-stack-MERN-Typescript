@@ -1,5 +1,4 @@
-// src/types/book.d.ts
-interface Book {
+export interface Book {
   id: number | string;
 
   title: string;
@@ -13,7 +12,7 @@ interface Book {
   tags?: string[];
 
   pages: number;
-  condition?: "new" | "used";
+  condition?: "new" | "used" | "like_new";
 
   price: number;
   stock?: number;
@@ -24,7 +23,5 @@ interface Book {
   updatedAt?: Date;
 }
 
-type BookCondition = "new" | "used" | "like_new";
-type LanguageCode = "es" | "en";
-
-export default Book;
+export type BookCondition = "new" | "used" | "like_new";
+export type LanguageCode = "es" | "en";

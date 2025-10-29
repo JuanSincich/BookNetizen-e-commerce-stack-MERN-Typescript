@@ -20,26 +20,9 @@ import { CloudUpload } from "@mui/icons-material";
 import SingleButton from "../uiComp/button/SingleButton";
 import SolidButton from "../uiComp/button/SolidButton";
 import theme from "../../theme/Theme";
-
-const categories = [
-  "Ficción",
-  "No Ficción",
-  "Ciencia Ficción",
-  "Fantasía",
-  "Romance",
-  "Terror",
-  "Biografía",
-  "Infantil",
-];
-
-const languages = [
-  "Español",
-  "Inglés",
-  "Francés",
-  "Alemán",
-  "Italiano",
-  "Portugués",
-];
+import { Book } from "../../types/book";
+import { categories, languages } from "../../data/formOptions";
+import axios from "axios";
 
 export default function AddBookPage() {
   const [title, setTitle] = useState("");
@@ -70,36 +53,48 @@ export default function AddBookPage() {
   const [pages, setPages] = useState("");
   const [stock, setStock] = useState("");
   const [tags, setTags] = useState<string[]>([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+    try {
+      setIsSubmitting(true);
+      // 1. Aquí luego subirás la imagen y obtendrás la URL
+      let coverImageUrl = "";
+      if (coverImage) {
+        // coverImageUrl = await uploadImageToService(coverImage);
+        coverImageUrl = "URL_TEMPORAL"; // Mock por ahora
+      }
 
-    // 1. Aquí luego subirás la imagen y obtendrás la URL
-    let coverImageUrl = "";
-    if (coverImage) {
-      // coverImageUrl = await uploadImageToService(coverImage);
-      coverImageUrl = "URL_TEMPORAL"; // Mock por ahora
+      // 2. Crear objeto Book listo para enviar
+      const bookData: Book = {
+        id: "temporal",
+        title,
+        author,
+        description,
+        coverImage: coverImageUrl,
+        category,
+        price: Number(price),
+        isbn: isbn || undefined,
+        language: language || undefined,
+        condition: condition || undefined,
+        pages: pages ? Number(pages) : 0,
+        stock: stock ? Number(stock) : undefined,
+        tags: tags.length > 0 ? tags : undefined,
+        userId: "USER_ID_TEMPORAL", // Luego conectarás con auth
+        createdAt: new Date(),
+      };
+
+      const response = await axios.post(
+        "http://localhost:3001/books",
+        bookData
+      );
+      console.log("Libro publicado exitosamente:", response.data);
+    } catch (error) {
+      console.error("Error al publicar libro:", error);
+    } finally {
+      setIsSubmitting(false);
     }
-
-    // 2. Crear objeto Book listo para enviar
-    const bookData = {
-      title,
-      author,
-      description,
-      coverImage: coverImageUrl,
-      category,
-      price: Number(price),
-      isbn: isbn || undefined,
-      language: language || undefined,
-      condition: condition || undefined,
-      pages: pages ? Number(pages) : undefined,
-      stock: stock ? Number(stock) : undefined,
-      tags: tags.length > 0 ? tags : undefined,
-      userId: "USER_ID_TEMPORAL", // Luego conectarás con auth
-      createdAt: new Date(),
-    };
-
-    console.log("Datos del libro listos para enviar:", bookData);
   };
   return (
     <Box>
