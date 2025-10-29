@@ -10,6 +10,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import authenticateToken from "./middleware/authMiddleware";
 import cors from "cors";
+import Book from "./db/models/Book";
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -159,6 +160,26 @@ app.get("/profile", authenticateToken, (req: Request, res: Response) => {
     userId: authReq.user?.id,
     data: "Esta es información confidencial solo para usuarios autenticados.",
   });
+});
+
+app.post("/books", async (req: Request, res: Response) => {
+  try {
+    const bookData = req.body;
+
+    const newBook = new Book(bookData);
+    await newBook.save();
+
+    res.status(201).json({
+      message: "Libro creado exitosamente",
+      book: newBook,
+    });
+  } catch (error: any) {
+    console.error("Error al crear libro:", error);
+    res.status(500).json({
+      message: "Error interno del servidor al crear libro",
+      error: error.message,
+    });
+  }
 });
 
 app.listen(PORT, () => {
