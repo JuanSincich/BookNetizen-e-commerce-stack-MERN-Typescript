@@ -86,7 +86,7 @@ export default function AddBookPage() {
       };
 
       const response = await axios.post(
-        "http://localhost:3001/books",
+        "https://booknetizen-backend.onrender.com/books",
         bookData
       );
       console.log("Libro publicado exitosamente:", response.data);
