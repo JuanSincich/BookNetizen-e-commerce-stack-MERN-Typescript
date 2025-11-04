@@ -2,7 +2,7 @@ import { Box, Button } from "@mui/material";
 import theme from "../../../theme/Theme";
 
 interface SingleButtonProps {
-  type: "submit";
+  type?: "submit";
   text: React.ReactNode;
   style?: "main" | "light";
   width?: string;
@@ -11,11 +11,12 @@ interface SingleButtonProps {
 }
 
 export default function SolidButton({
-  type,
+  type = "submit",
   text,
   style = "main",
   width,
   align,
+  disabled = false,
 }: SingleButtonProps) {
   const { backgroundColor, color } = {
     backgroundColor:
@@ -46,6 +47,7 @@ export default function SolidButton({
           fontSize: "1rem",
           fontWeight: "500",
           lineHeight: "normal",
+          opacity: disabled ? 0.6 : 1,
         }}
       >
         {text}

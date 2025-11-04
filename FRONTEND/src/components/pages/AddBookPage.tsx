@@ -4,7 +4,6 @@ import {
   Container,
   FormControl,
   FormControlLabel,
-  FormLabel,
   Grid2,
   InputAdornment,
   InputLabel,
@@ -17,7 +16,7 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { CloudUpload } from "@mui/icons-material";
-import SingleButton from "../uiComp/button/SingleButton";
+
 import SolidButton from "../uiComp/button/SolidButton";
 import theme from "../../theme/Theme";
 import { Book } from "../../types/book";
@@ -340,7 +339,11 @@ export default function AddBookPage() {
               </Grid2>
 
               <Grid2 size={12}>
-                <SolidButton type="submit" text="Publicar"></SolidButton>
+                <SolidButton
+                  type="submit"
+                  text={isSubmitting ? "Publicando..." : "Publicar"}
+                  disabled={isSubmitting}
+                ></SolidButton>
               </Grid2>
             </Grid2>
           </Box>
