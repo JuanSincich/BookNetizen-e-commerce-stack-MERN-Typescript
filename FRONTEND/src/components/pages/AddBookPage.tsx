@@ -59,25 +59,12 @@ export default function AddBookPage() {
     event.preventDefault();
     try {
       setIsSubmitting(true);
-      // 1. Aquí luego subirás la imagen y obtendrás la URL
+
       let coverImageUrl = "";
       if (coverImage) {
-        const formData = new FormData();
-        formData.append("image", coverImage);
-
-        const uploadResponse = await axios.post(
-          `${API_URL}/upload-image`,
-          formData,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          }
-        );
-        coverImageUrl = uploadResponse.data.imageUrl;
+        coverImageUrl = "URL_TEMPORAL";
       }
 
-      // 2. Crear objeto Book listo para enviar
       const bookData: Book = {
         id: "temporal",
         title,
