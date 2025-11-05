@@ -11,6 +11,9 @@ import jwt from "jsonwebtoken";
 import authenticateToken from "./middleware/authMiddleware";
 import cors from "cors";
 import Book from "./db/models/Book";
+import { v2 as cloudinary } from "cloudinary";
+import multer from "multer";
+import fs from "fs";
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -34,6 +37,16 @@ const corsOptions = {
   credentials: true,
 };
 app.use(cors());
+
+// Configurar Cloudinary
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
+// Configurar multer para subida de archivos
+const upload = multer({ dest: "uploads/" });
 
 app.post("/register", async (req: Request, res: Response) => {
   const { username, email, password } = req.body;
@@ -161,6 +174,44 @@ app.get("/profile", authenticateToken, (req: Request, res: Response) => {
     data: "Esta es información confidencial solo para usuarios autenticados.",
   });
 });
+
+// Endpoint para subir imágenes a Cloudinary
+app.post(
+  "/upload-image",
+  upload.single("image"),
+  async (req: Request, res: Response) => {
+    try {
+      if (!req.file) {
+        return res.status(400).json({ message: "No se proporcionó imagen" });
+      }
+
+      // Subir a Cloudinary
+      const result = await cloudinary.uploader.upload(req.file.path, {
+        folder: "booknetizen",
+      });
+
+      // Eliminar archivo temporal
+      fs.unlinkSync(req.file.path);
+
+      res.status(200).json({
+        message: "Imagen subida exitosamente",
+        imageUrl: result.secure_url,
+      });
+    } catch (error: any) {
+      console.error("Error al subir imagen:", error);
+
+      // Limpiar archivo temporal en caso de error
+      if (req.file) {
+        fs.unlinkSync(req.file.path);
+      }
+
+      res.status(500).json({
+        message: "Error al subir imagen",
+        error: error.message,
+      });
+    }
+  }
+);
 
 app.post("/books", async (req: Request, res: Response) => {
   try {
