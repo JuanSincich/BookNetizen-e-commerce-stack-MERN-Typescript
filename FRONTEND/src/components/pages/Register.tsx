@@ -14,6 +14,7 @@ import {
 import React, { useState } from "react";
 import SolidButton from "../uiComp/button/SolidButton";
 import axios from "axios";
+import { API_URL } from "../../config/api";
 
 export default function Register() {
   const [email, setEmail] = useState("");
@@ -106,10 +107,7 @@ export default function Register() {
     };
 
     try {
-      const response = await axios.post(
-        "https://api.example.com/register",
-        formData
-      );
+      const response = await axios.post(`${API_URL}/register`, formData);
       // ¡IMPORTANTE: ELIMINA ESTA LÍNEA en tu código final cuando tengas un backend real!
       await new Promise((resolve) => setTimeout(resolve, 1500));
 

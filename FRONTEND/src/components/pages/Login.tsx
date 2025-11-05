@@ -4,7 +4,7 @@ import Link from "@mui/material/Link";
 import SolidButton from "../uiComp/button/SolidButton";
 import React, { useState } from "react";
 import axios from "axios";
-
+import { API_URL } from "../../config/api";
 interface LoginProps {
   onCloseModal: () => void; // Función para cerrar el modal
 }
@@ -21,7 +21,7 @@ export default function Login({ onCloseModal }: LoginProps) {
 
     setError("");
     try {
-      const response = await axios.post("http://localhost:3001/login", {
+      const response = await axios.post(`${API_URL}/login`, {
         email,
         password,
       });

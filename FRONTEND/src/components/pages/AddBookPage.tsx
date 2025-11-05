@@ -22,6 +22,7 @@ import theme from "../../theme/Theme";
 import { Book } from "../../types/book";
 import { categories, languages } from "../../data/formOptions";
 import axios from "axios";
+import { API_URL } from "../../config/api";
 
 export default function AddBookPage() {
   const [title, setTitle] = useState("");
@@ -84,10 +85,7 @@ export default function AddBookPage() {
         createdAt: new Date(),
       };
 
-      const response = await axios.post(
-        "https://booknetizen-backend.onrender.com/books",
-        bookData
-      );
+      const response = await axios.post(`${API_URL}/books`, bookData);
       console.log("Libro publicado exitosamente:", response.data);
     } catch (error) {
       console.error("Error al publicar libro:", error);
