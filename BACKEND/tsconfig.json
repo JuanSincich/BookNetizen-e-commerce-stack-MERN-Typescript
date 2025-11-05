@@ -9,8 +9,7 @@
     "strict": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "rootDir": "./src",
-    "types": ["node", "multer"]
+    "rootDir": "./src"
   },
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules"]
