@@ -179,7 +179,7 @@ app.get("/profile", authenticateToken, (req: Request, res: Response) => {
 app.post(
   "/upload-image",
   upload.single("image"),
-  async (req: Request, res: Response) => {
+  async (req: Request & { file?: any }, res: Response) => {
     try {
       if (!req.file) {
         return res.status(400).json({ message: "No se proporcionó imagen" });
