@@ -59,14 +59,12 @@ export default function AddBookPage() {
     event.preventDefault();
     try {
       setIsSubmitting(true);
-      // 1. Aquí luego subirás la imagen y obtendrás la URL
+
       let coverImageUrl = "";
       if (coverImage) {
-        // coverImageUrl = await uploadImageToService(coverImage);
-        coverImageUrl = "URL_TEMPORAL"; // Mock por ahora
+        coverImageUrl = "URL_TEMPORAL";
       }
 
-      // 2. Crear objeto Book listo para enviar
       const bookData: Book = {
         id: "temporal",
         title,

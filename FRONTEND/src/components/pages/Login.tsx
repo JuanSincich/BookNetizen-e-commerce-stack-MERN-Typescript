@@ -5,6 +5,7 @@ import SolidButton from "../uiComp/button/SolidButton";
 import React, { useState } from "react";
 import axios from "axios";
 import { API_URL } from "../../config/api";
+
 interface LoginProps {
   onCloseModal: () => void; // Función para cerrar el modal
 }
