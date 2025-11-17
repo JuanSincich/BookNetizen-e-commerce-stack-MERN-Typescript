@@ -13,7 +13,7 @@ export default function Home() {
   return (
     <>
       <SearchBar />
-      <AddBookPage />
+      {/*      <AddBookPage /> */}
       <Hero />
       <Carousel title="Los mas visitados" />
       <Carousel title="Los más vendidos" />

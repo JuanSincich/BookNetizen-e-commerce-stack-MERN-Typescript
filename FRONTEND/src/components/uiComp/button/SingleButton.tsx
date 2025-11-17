@@ -4,11 +4,13 @@ import theme from "../../../theme/Theme";
 interface SingleButtonProps {
   text: string;
   variantColor?: "primary" | "secondary";
+  onClick?: () => void;
 }
 
 export default function SingleButton({
   text,
   variantColor,
+  onClick,
 }: SingleButtonProps) {
   const buttonColor =
     variantColor === "primary"
@@ -18,6 +20,7 @@ export default function SingleButton({
     <Box>
       <Button
         variant="outlined"
+        onClick={onClick}
         sx={{
           border: 3,
           borderRadius: 3,
