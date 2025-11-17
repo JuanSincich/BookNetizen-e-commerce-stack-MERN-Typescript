@@ -9,7 +9,7 @@ interface SingleButtonProps {
 
 export default function SingleButton({
   text,
-  variantColor,
+  variantColor = "primary",
   onClick,
 }: SingleButtonProps) {
   const buttonColor =
