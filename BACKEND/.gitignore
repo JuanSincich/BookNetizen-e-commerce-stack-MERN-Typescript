@@ -1,0 +1,5 @@
+# Ignorar archivo de variables de entorno sensibles
+node_modules/
+dist/
+uploads/
+.env
