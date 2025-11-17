@@ -86,7 +86,11 @@ export default function NavBar({ navArrayLinks }: NavBarProps) {
                 Book Netizen
               </Typography>
             </Box>
-            <SingleButton text="Publicar Libro" variantColor="secondary" />
+            <SingleButton
+              text="Publicar Libro"
+              variantColor="secondary"
+              onClick={() => navigate("/add-book")}
+            />
             {/* botones */}
             <Box sx={{ display: { xs: "none", sm: "block" } }}>
               {navArrayLinks.map((item) => (
