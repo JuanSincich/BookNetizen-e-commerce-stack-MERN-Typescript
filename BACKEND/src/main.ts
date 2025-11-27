@@ -74,6 +74,7 @@ app.post("/register", async (req: Request, res: Response) => {
     res.status(201).json({
       message: "Usuario registrado exitosamente",
       user: {
+        id: newUser._id,
         username: newUser.username,
         email: newUser.email,
       },
@@ -136,8 +137,9 @@ app.post("/login", async (req: Request, res: Response) => {
       message: "¡Login exitoso!",
       token,
       user: {
+        id: user._id, // ← AGREGAR ID (MongoDB usa _id)
         username: user.username,
-        email: user.email, // Solo devuelve información segura
+        email: user.email,
       },
     });
   } catch (error: any) {
