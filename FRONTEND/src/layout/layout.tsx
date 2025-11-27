@@ -9,6 +9,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import StarIcon from "@mui/icons-material/Star";
 import AutoCarousel from "../components/uiComp/banner/AutoCarousel";
+import { useAuth } from "../auth/AuthContext";
 
 interface NavLink {
   title: string;
@@ -19,6 +20,7 @@ interface NavLink {
 
 export default function Layout() {
   const [loginOpen, setLoginOpen] = useState(false);
+  const { user, isAuthenticated } = useAuth();
 
   const handleCloseLoginModal = () => {
     setLoginOpen(false);
@@ -27,12 +29,22 @@ export default function Layout() {
   const navArrayLinks: NavLink[] = [
     { title: "Inicio", path: "/" },
     { title: "Categorías", path: "/categories" },
-    {
-      title: "Login",
-      path: "/login",
-      icon: <PersonIcon />,
-      action: () => setLoginOpen(true),
-    },
+    ...(isAuthenticated && user
+      ? [
+          {
+            title: user.username, // ← Nombre del usuario
+            path: "/profile",
+            icon: null,
+          },
+        ]
+      : [
+          {
+            title: "Login",
+            path: "/login",
+            icon: <PersonIcon />,
+            action: () => setLoginOpen(true),
+          },
+        ]),
     { title: "Favoritos", path: "/favourites", icon: <StarIcon /> },
     { title: "Carrito", path: "/carrito", icon: <ShoppingCartIcon /> },
   ];

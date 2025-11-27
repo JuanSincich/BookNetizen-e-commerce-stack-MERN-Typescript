@@ -5,6 +5,7 @@ import SolidButton from "../uiComp/button/SolidButton";
 import React, { useState } from "react";
 import axios from "axios";
 import { API_URL } from "../../config/api";
+import { useAuth } from "../../auth/AuthContext";
 
 interface LoginProps {
   onCloseModal: () => void; // Función para cerrar el modal
@@ -14,6 +15,7 @@ export default function Login({ onCloseModal }: LoginProps) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const { login } = useAuth();
 
   // Capturamos los datos del formulario
 
@@ -27,6 +29,13 @@ export default function Login({ onCloseModal }: LoginProps) {
         password,
       });
       console.log("REspuesta backend: ", response.data);
+      const userData = response.data.user;
+      login({
+        id: userData.id, // ← Esto vendrá del backend
+        username: userData.username,
+        email: userData.email,
+      });
+      onCloseModal();
     } catch (err: any) {
       console.error("Error en login:", err);
       if (err.response && err.response.status === 401) {
